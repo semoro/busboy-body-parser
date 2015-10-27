@@ -38,7 +38,7 @@ module.exports = function (settings) {
                     };
                     
                     if(req.files[key]){
-                        if(!req.files[key].isArray()){
+                        if(!req.files[key] instanceof Array){
                             req.files[key] = [ req.files[key] ];
                         }
                         req.files[key].push(obj);
