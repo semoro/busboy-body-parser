@@ -28,7 +28,7 @@ module.exports = function (settings) {
             busboy.on('file', function (key, file, name, enc, mimetype) {
                 file.pipe(concat(function (d) {
                     debug('Received file %s', file);
-                    req.files[key] = {
+                    var obj = {
                         data: file.truncated ? null : d,
                         name: name,
                         encoding: enc,
@@ -36,6 +36,16 @@ module.exports = function (settings) {
                         truncated: file.truncated,
                         size: Buffer.byteLength(d.toString('binary'), 'binary')
                     };
+                    
+                    if(req.files[key]){
+                        if(!req.files[key].isArray()){
+                            req.files[key] = [ req.files[key] ];
+                        }
+                        req.files[key].push(obj);
+                    }else{
+                        req.files[key]=obj;
+                    }
+                    
                 }));
             });
             busboy.on('finish', function () {

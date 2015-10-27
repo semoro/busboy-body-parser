@@ -81,6 +81,7 @@ describe('multipart form parser', function () {
                 name: 'test.jpg',
                 encoding: 'binary',
                 mimetype: 'image/jpeg',
+                size: 6,
                 truncated: false
             });
             done();
@@ -104,6 +105,7 @@ describe('multipart form parser', function () {
                 name: 'test.jpg',
                 encoding: 'binary',
                 mimetype: 'image/jpeg',
+                size: 6,
                 truncated: true
             });
             done();
